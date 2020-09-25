@@ -39,8 +39,8 @@ class MapWriter {
   String write() {
     return render(clazzTpl, <String, dynamic>{
       'refs': importList(),
-      'fromJson': createFromJson(),
-      'toJson': createToJson(),
+      'instanceFromJson': createFromJson(),
+      'instanceToJson': createToJson(),
     });
   }
 }
