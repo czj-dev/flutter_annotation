@@ -11,7 +11,7 @@ import 'annotation_parser.dart';
 
 class JsonSerializableMapParser
     extends GeneratorForAnnotation<JsonSerializable> {
-  static AnnotationParser annotationParser;
+  static AnnotationParser annotationParser = AnnotationParser();
 
   // 获取所有标记了 JsonSerializable 注解的类
   @override

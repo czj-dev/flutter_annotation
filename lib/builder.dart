@@ -7,4 +7,4 @@ Builder parserBuilder(BuilderOptions options) => LibraryBuilder(JsonSerializable
 
 Builder writeBuilder(BuilderOptions options) =>
     LibraryBuilder(JsonSerializableMapGenerator(),
-        generatedExtension: '.internal.dart');
+        generatedExtension: '.mapper.dart');

@@ -11,13 +11,13 @@ targets:
         enabled: true
         options: { 'write': true }
         generate_for:
-          exclude: ['**.internal.dart']
+          exclude: ['**.dart']
 
 builders:
   route_write_builder:
     import: 'package:json_serializable_map/builder.dart'
     builder_factories: ['writeBuilder']
-    build_extensions: { '.mapper.dart': ['.internal.dart'] }
+    build_extensions: { '.mapper.dart': ['.dart'] }
     auto_apply: root_package
     build_to: source
 

@@ -19,7 +19,12 @@ class AnnotationParser {
       return;
     }
     classMap[element.displayName] = {"name": element.name};
-    importList.add(
-        "package:${buildStep.inputId.package}/${buildStep.inputId.path.replaceFirst("lib/", '')}");
+    if (buildStep.inputId.path.contains('lib/')) {
+      print(buildStep.inputId.path);
+      importList.add(
+          "package:${buildStep.inputId.package}/${buildStep.inputId.path.replaceFirst('lib/', '')}");
+    } else {
+      importList.add("${buildStep.inputId.path}");
+    }
   }
 }
