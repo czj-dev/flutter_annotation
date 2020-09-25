@@ -8,7 +8,8 @@ class AnnotationParser {
 
   void parseRoute(
       ClassElement element, ConstantReader annotation, BuildStep buildStep) {
-    print('start parseRoute for ${element.displayName}');
+    print(
+        'start parseRoute for ${element.displayName}_________ this element type(${element.thisType})');
     classMap[element.displayName.toString()] = {"name": element.name};
     if (buildStep.inputId.path.contains('lib/')) {
       print(buildStep.inputId.path);

@@ -11,20 +11,28 @@ class MapWriter {
     final StringBuffer buffer = StringBuffer();
     buffer.writeln('switch (serializableKey) {');
     annotationParser.classMap.forEach((String name, dynamic object) {
-      buffer.writeln('case "$name": return $name.fromJson(json);');
+      createElementFromJson(buffer, name);
     });
     buffer..writeln('default:return null;')..writeln('}');
     return buffer.toString();
+  }
+
+  void createElementFromJson(StringBuffer buffer, String name) {
+     buffer.writeln('case "$name": return $name.fromJson(json);');
   }
 
   String createToJson() {
     final StringBuffer buffer = StringBuffer();
     buffer.writeln('switch (serializableKey) {');
     annotationParser.classMap.forEach((String name, dynamic object) {
-      buffer.writeln('case "$name": return (instance as $name).toJson();');
+      createElementToJson(buffer, name);
     });
     buffer..writeln('default:return null;')..writeln('}');
     return buffer.toString();
+  }
+
+  void createElementToJson(StringBuffer buffer, String name) {
+     buffer.writeln('case "$name": return (instance as $name).toJson();');
   }
 
   List<Map<String, String>> importList() {
