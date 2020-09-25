@@ -9,15 +9,6 @@ class AnnotationParser {
   void parseRoute(
       ClassElement element, ConstantReader annotation, BuildStep buildStep) {
     print('start parseRoute for ${element.displayName}');
-    if (element.isAbstract || element.isEnum) {
-      return;
-    }
-    if (element.getMethod("fromJson") == null) {
-      return;
-    }
-    if (element.getMethod("toJson") == null) {
-      return;
-    }
     classMap[element.displayName] = {"name": element.name};
     if (buildStep.inputId.path.contains('lib/')) {
       print(buildStep.inputId.path);

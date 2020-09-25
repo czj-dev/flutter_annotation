@@ -9,7 +9,7 @@ class MapWriter {
 
   String createFromJson() {
     final StringBuffer buffer = StringBuffer();
-    buffer.writeln('switch (clazz) {');
+    buffer.writeln('switch (serializableKey) {');
     annotationParser.classMap.forEach((String name, dynamic object) {
       buffer.writeln('case $name: return name.fromJson(data);');
     });
@@ -19,7 +19,7 @@ class MapWriter {
 
   String createToJson() {
     final StringBuffer buffer = StringBuffer();
-    buffer.writeln('switch (clazz) {');
+    buffer.writeln('switch (serializableKey) {');
     annotationParser.classMap.forEach((String name, dynamic object) {
       buffer.writeln('case $name: return name.toJson(instance);');
     });
