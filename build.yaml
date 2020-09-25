@@ -1,0 +1,30 @@
+
+# Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+targets:
+  $default:
+    builders:
+      json_serializable_map|parser_builder:
+        enabled: true
+        generate_for:
+          exclude: ['**.internal.dart']
+      json_serializable_map|write_builder:
+        enabled: true
+        options: { 'write': true }
+        generate_for:
+          exclude: ['**.internal.dart']
+
+builders:
+  route_write_builder:
+    import: 'package:json_serializable_map/builder.dart'
+    builder_factories: ['writeBuilder']
+    build_extensions: { '.mapper.dart': ['.internal.dart'] }
+    auto_apply: root_package
+    build_to: source
+
+  route_builder:
+    import: 'package:json_serializable_map/builder.dart'
+    builder_factories: ['parserBuilder']
+    build_extensions: { '.dart': ['internal_invalid..dart'] }
+    auto_apply: root_package
+    runs_before: ['json_serializable_map|write_builder']
+    build_to: source
