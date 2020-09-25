@@ -1,5 +1,5 @@
-import 'package:json_serializable_map/annotation_parser.dart';
-import 'package:json_serializable_map/tpl.dart';
+import 'package:json_serializable_map/src/annotation_parser.dart';
+import 'package:json_serializable_map/src/tpl.dart';
 import 'package:mustache4dart/mustache4dart.dart';
 
 class MapWriter {

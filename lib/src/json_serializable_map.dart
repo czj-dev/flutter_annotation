@@ -3,7 +3,8 @@ library json_serializable_map;
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:json_serializable_map/map_writer.dart';
+import 'package:json_serializable_map/mapper.dart';
+import 'package:json_serializable_map/src/map_writer.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'annotation_parser.dart';
@@ -22,7 +23,7 @@ class JsonSerializableMapParser
 }
 
 class JsonSerializableMapGenerator
-    extends GeneratorForAnnotation<JsonSerializable> {
+    extends GeneratorForAnnotation<SerializableMapper> {
   AnnotationParser parser() {
     return JsonSerializableMapParser.annotationParser;
   }

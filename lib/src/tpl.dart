@@ -3,8 +3,8 @@ import 'dart:convert';
 {{#refs}}
 import '{{{path}}}';
 {{/refs}}
-class JsonSerializableMapper {
-  JsonSerializableMapper();
+class \$JsonSerializableMapper {
+  \$JsonSerializableMapper();
 
   T  serializableIn<T>(Map<String,dynamic> data) {
      var object = fromJson(T.toString(), data);
