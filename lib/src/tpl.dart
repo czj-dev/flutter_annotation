@@ -15,11 +15,8 @@ class \$JsonSerializableMapper {
   }
   
   
-  String serializableOut<T>(dynamic instance) {
+  Map<String,dynamic> serializableOut<T>(Object instance) {
     var data = toJson(T.toString(), instance);
-    if(data==null) {
-      data = json.encode(instance);
-    }
     return data;
   }
 
@@ -28,7 +25,7 @@ class \$JsonSerializableMapper {
     {{{instanceFromJson}}}
   }
 
-  String toJson(String serializableKey,dynamic instance) {
+  Map<String, dynamic> toJson(String serializableKey,dynamic instance) {
     {{{instanceToJson}}}
   }
 }

@@ -21,7 +21,7 @@ class MapWriter {
     final StringBuffer buffer = StringBuffer();
     buffer.writeln('switch (serializableKey) {');
     annotationParser.classMap.forEach((String name, dynamic object) {
-      buffer.writeln('case "$name": return $name.toJson(instance);');
+      buffer.writeln('case "$name": return (instance as $name).toJson();');
     });
     buffer..writeln('default:return null;')..writeln('}');
     return buffer.toString();
