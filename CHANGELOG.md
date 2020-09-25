@@ -2,6 +2,3 @@
 
 * TODO: Describe initial release.
 
-## [0.0.2]
-
-* config build.yaml
