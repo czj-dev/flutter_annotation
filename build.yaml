@@ -14,14 +14,14 @@ targets:
           exclude: ['**.dart']
 
 builders:
-  route_write_builder:
+  write_builder:
     import: 'package:json_serializable_map/builder.dart'
     builder_factories: ['writeBuilder']
     build_extensions: { '.mapper.dart': ['.dart'] }
     auto_apply: root_package
     build_to: source
 
-  route_builder:
+  parser_builder:
     import: 'package:json_serializable_map/builder.dart'
     builder_factories: ['parserBuilder']
     build_extensions: { '.dart': ['internal_invalid..dart'] }

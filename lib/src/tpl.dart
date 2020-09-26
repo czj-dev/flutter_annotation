@@ -24,7 +24,7 @@ class JsonSerializableMapper {
 
 
   Object fromJson(String serializableKey,Map<String,dynamic> json) {
-   /*// 如果有嵌套泛型
+   // 如果有嵌套泛型
     if (serializableKey.contains("<")) {
       List<String> split = serializableKey.replaceAll(">", "").split("<");
       //只需要处理容器,目前只处理 List
@@ -40,7 +40,7 @@ class JsonSerializableMapper {
         data = fromJson(split[0], object);
       }
       return data;
-    }*/
+    }
     {{{instanceFromJson}}}
   }
 
