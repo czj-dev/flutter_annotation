@@ -8,7 +8,7 @@ class JsonSerializableMapper {
     return JsonSerializableMapper();
   }
 
-  T serializableIn<T>(Map<String, dynamic> data) {
+  T serializableIn<T>(dynamic data) {
     var object = nestListFromJson(T.toString(), data);
     if (object != null) {
       return object as T;
@@ -17,12 +17,12 @@ class JsonSerializableMapper {
         "this data not find  serializable object, please implements @JsonSerializable");
   }
 
-  Map<String, dynamic> serializableOut<T>(Object instance) {
+  Map<String, dynamic> serializableOut<T>(dynamic instance) {
     var data = nestListToJson<T>(T.toString(), instance);
     return data;
   }
 
-  Object nestListFromJson<T>(String serializableKey, Object json) {
+  Object nestListFromJson<T>(String serializableKey, dynamic json) {
     // 如果传递进来泛型为嵌套泛型的话,需要甄别一下
     // 如果实体需要自己在 fromJson 里使用[ClassParserMapper.serializableIn<T>(json['data'])] 解析
     // 如果是 List 则循环解析输出
@@ -34,6 +34,9 @@ class JsonSerializableMapper {
         var list = json;
         list.forEach((element) {
           split.remove(0);
+          // 这里仍然有问题没有解决,泛型T是没法裁切,所以这里以 string 为基准
+          // 但是遇到 List<X<List<B>>> 这类特殊情况或者 AppResponse<A<C<A>>> 循环嵌套
+          // 还是无法解决,目前只能编码避免
           (data as List)
               .add(nestListFromJson<T>(listToGeneric(split), element));
         });
@@ -46,7 +49,7 @@ class JsonSerializableMapper {
   }
 
   Map<String, dynamic> nestListToJson<T>(
-      String serializableKey, Object instance) {
+      String serializableKey, dynamic instance) {
     // 如果传递进来泛型为嵌套泛型的话,需要甄别一下
     // 如果实体需要自己在 toJson 里使用[ClassParserMapper.serializableOut<T>(instance] 解析
     // 如果是 List 则循环解析输出
@@ -84,7 +87,7 @@ class JsonSerializableMapper {
     return generic;
   }
 
-  Object fromJson<T>(String serializableKey,Map<String,dynamic> json) {
+  Object fromJson<T>(String serializableKey,dynamic json) {
     {{{instanceFromJson}}}
   }
 

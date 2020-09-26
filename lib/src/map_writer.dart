@@ -14,7 +14,7 @@ class MapWriter {
     annotationParser.classMap.forEach((String name, dynamic object) {
       createElementFromJson(buffer, name, object);
     });
-    buffer..writeln('default:return null;')..writeln('}');
+    buffer..writeln('default:return json;')..writeln('}');
     return buffer.toString();
   }
 
@@ -39,7 +39,7 @@ class MapWriter {
     annotationParser.classMap.forEach((String name, dynamic object) {
       createElementToJson(buffer, name, object);
     });
-    buffer..writeln('default:return null;')..writeln('}');
+    buffer..writeln('default:return instance;')..writeln('}');
     return buffer.toString();
   }
 
