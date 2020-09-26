@@ -19,21 +19,34 @@ class MapWriter {
   }
 
   void createElementFromJson(StringBuffer buffer, String name, dynamic value) {
-    buffer.writeln('case "$name": return $name.fromJson(json);');
+    //如果类包含泛型,则在解析的时候增加泛型的传递
+    String type = genericParser(value);
+    buffer.writeln('case "$name": return $name$type.fromJson(json);');
+  }
+
+  String genericParser(value) {
+    String type = '';
+    if (value is Map<String, dynamic>) {
+      bool generic = value['type'].toString().contains('<');
+      type = generic ? '<T>' : '';
+    }
+    return type;
   }
 
   String createToJson() {
     final StringBuffer buffer = StringBuffer();
     buffer.writeln('switch (serializableKey) {');
     annotationParser.classMap.forEach((String name, dynamic object) {
-      createElementToJson(buffer, name);
+      createElementToJson(buffer, name, object);
     });
     buffer..writeln('default:return null;')..writeln('}');
     return buffer.toString();
   }
 
-  void createElementToJson(StringBuffer buffer, String name) {
-    buffer.writeln('case "$name": return (instance as $name).toJson();');
+  void createElementToJson(StringBuffer buffer, String name, dynamic value) {
+    //如果类包含泛型,则在解析的时候增加泛型的传递
+    String type = genericParser(value);
+    buffer.writeln('case "$name": return (instance as $name$type).toJson();');
   }
 
   List<Map<String, String>> importList() {
