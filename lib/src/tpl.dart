@@ -4,11 +4,19 @@ import 'dart:convert';
 import '{{{path}}}';
 {{/refs}}
 class JsonSerializableMapper {
-  factory JsonSerializableMapper() {
-    return JsonSerializableMapper();
+  JsonSerializableMapper._();
+
+  static JsonSerializableMapper _instance;
+
+  static JsonSerializableMapper instance() {
+    if (_instance == null) {
+      _instance = JsonSerializableMapper._();
+    }
+    return _instance;
   }
 
   T serializableIn<T>(dynamic data) {
+    if (data == null) return null;
     var object = nestListFromJson(T.toString(), data);
     if (object != null) {
       return object as T;
@@ -18,7 +26,8 @@ class JsonSerializableMapper {
   }
 
   Map<String, dynamic> serializableOut<T>(dynamic instance) {
-    var data = nestListToJson<T>(T.toString(), instance);
+    if (instance == null) return null;
+    var data = nestListToJson<T>(instance.runtimeType.toString(), instance);
     return data;
   }
 
